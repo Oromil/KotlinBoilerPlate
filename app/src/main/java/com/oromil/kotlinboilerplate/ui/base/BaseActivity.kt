@@ -8,6 +8,7 @@ import com.oromil.kotlinboilerplate.dagger.components.ConfigPersistentComponent
 import com.oromil.kotlinboilerplate.dagger.components.DaggerConfigPersistentComponent
 import com.oromil.kotlinboilerplate.dagger.module.ActivityModule
 import java.util.concurrent.atomic.AtomicLong
+import javax.inject.Inject
 
 abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
     : AppCompatActivity(), IMvpView {
@@ -19,7 +20,7 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
     private lateinit var mActivityComponent: ActivityComponent
     private var activityId: Long = NEXT_ID.get()
 
-    protected abstract var mPresenter: T
+    @Inject protected lateinit var mPresenter: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +29,15 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
         onComponentCreated(mActivityComponent)
 
         setContentView(getLayoutId())
+        mPresenter.attachView(this as V)
         initViews()
 
-        mPresenter.attachView(this as V)
     }
 
-    protected fun createActivityComponent(savedInstanceState: Bundle?) {
+    private fun createActivityComponent(savedInstanceState: Bundle?) {
         activityId = savedInstanceState?.getLong(KEY_ACTIVITY_ID) ?: NEXT_ID.getAndIncrement()
 
-        var configPersistentComponent: ConfigPersistentComponent
+        val configPersistentComponent: ConfigPersistentComponent
         if (!componentsMap.containsKey(activityId)) {
             configPersistentComponent = DaggerConfigPersistentComponent.builder()
                     .applicationComponent(BoilerplateApp.get(this).component).build()
@@ -53,22 +54,6 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
     protected abstract fun getLayoutId(): Int
 
     protected open fun initViews() {}
-
-//    override fun showError(error: String?) {
-//        Toast.makeText(this, error, Toast.LENGTH_LONG).show()
-//    }
-//
-//    override fun showError(stringResId: Int) {
-//        Toast.makeText(this, stringResId, Toast.LENGTH_LONG).show()
-//    }
-//
-//    override fun showMessage(srtResId: Int) {
-//        Toast.makeText(this, srtResId, Toast.LENGTH_LONG).show()
-//    }
-//
-//    override fun showMessage(message: String) {
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-//    }
 
     override fun onDestroy() {
         mPresenter.detachView()

@@ -1,4 +1,4 @@
-package com.prokofevivan.kotlinboilerplate.injection
+package com.oromil.kotlinboilerplate.dagger
 
 import javax.inject.Qualifier
 

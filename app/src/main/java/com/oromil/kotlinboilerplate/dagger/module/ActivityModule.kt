@@ -2,7 +2,7 @@ package com.oromil.kotlinboilerplate.dagger.module
 
 import android.app.Activity
 import android.content.Context
-import com.prokofevivan.kotlinboilerplate.injection.ActivityContext
+import com.oromil.kotlinboilerplate.dagger.ActivityContext
 import dagger.Module
 import dagger.Provides
 

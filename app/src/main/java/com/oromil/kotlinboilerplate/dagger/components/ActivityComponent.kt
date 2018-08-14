@@ -2,7 +2,7 @@ package com.oromil.kotlinboilerplate.dagger.components
 
 import com.oromil.kotlinboilerplate.ui.main.MainActivity
 import com.oromil.kotlinboilerplate.dagger.module.ActivityModule
-import com.prokofevivan.kotlinboilerplate.injection.PerActivity
+import com.oromil.kotlinboilerplate.dagger.PerActivity
 import dagger.Subcomponent
 
 @PerActivity

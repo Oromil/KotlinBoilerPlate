@@ -1,10 +1,11 @@
 package com.oromil.kotlinboilerplate.ui.main
 
+import android.util.Log
 import com.oromil.kotlinboilerplate.R
 import com.oromil.kotlinboilerplate.dagger.components.ActivityComponent
 import com.oromil.kotlinboilerplate.ui.base.BaseActivity
 
-class MainActivity(override var mPresenter: MainPresenter) : BaseActivity<MainMvpView, MainPresenter>() {
+class MainActivity : BaseActivity<MainMvpView, MainPresenter>() {
 
     override fun onComponentCreated(component: ActivityComponent) {
         component.inject(this)
@@ -15,6 +16,6 @@ class MainActivity(override var mPresenter: MainPresenter) : BaseActivity<MainMv
     }
 
     override fun initViews() {
-
+        Log.d("", "")
     }
 }

@@ -2,11 +2,10 @@ package com.oromil.kotlinboilerplate.dagger.components
 
 import android.app.Application
 import android.content.Context
-import com.oromil.kotlinboilerplate.BoilerplateApp
 import com.oromil.kotlinboilerplate.dagger.module.ApplicationModule
-import com.oromil.kotlinboilerplate.data.DataManager
 import com.oromil.kotlinboilerplate.data.network.Api
-import com.prokofevivan.kotlinboilerplate.injection.ApplicationContext
+import com.oromil.kotlinboilerplate.dagger.ApplicationContext
+import com.oromil.kotlinboilerplate.data.DataManager
 import dagger.Component
 import dagger.Provides
 import javax.inject.Singleton
@@ -16,15 +15,14 @@ import javax.inject.Singleton
 @Component(modules = [(ApplicationModule::class)])
 interface ApplicationComponent {
 
-    @Provides
     @ApplicationContext
-    fun context(): Context
+    fun provideApplication(): Application
 
-    @Provides
-    @ApplicationContext
-    fun application(): Application
+////    @ApplicationContext
+//    fun provideContext(): Context
 
-    @Provides
-    @Singleton
-    fun apiService():Api
+//    @Singleton
+//    @ApplicationContext
+    fun provideApiService():Api
+    fun dataManager():DataManager
 }

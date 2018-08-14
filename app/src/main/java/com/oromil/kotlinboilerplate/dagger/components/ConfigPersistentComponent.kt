@@ -1,6 +1,6 @@
 package com.oromil.kotlinboilerplate.dagger.components
 
-import com.prokofevivan.kotlinboilerplate.injection.ConfigPersistent
+import com.oromil.kotlinboilerplate.dagger.ConfigPersistent
 import com.oromil.kotlinboilerplate.dagger.module.ActivityModule
 import dagger.Component
 
