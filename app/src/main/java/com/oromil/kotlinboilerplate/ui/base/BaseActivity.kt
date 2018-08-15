@@ -1,5 +1,7 @@
 package com.oromil.kotlinboilerplate.ui.base
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.oromil.kotlinboilerplate.BoilerplateApp
@@ -10,7 +12,7 @@ import com.oromil.kotlinboilerplate.dagger.module.ActivityModule
 import java.util.concurrent.atomic.AtomicLong
 import javax.inject.Inject
 
-abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
+abstract class BaseActivity<in V : IMvpView, P : IPresenter<V>, M:ViewModel>
     : AppCompatActivity(), IMvpView {
 
     private val KEY_ACTIVITY_ID: String = "ACTIVITY_ID"
@@ -20,7 +22,8 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
     private lateinit var mActivityComponent: ActivityComponent
     private var activityId: Long = NEXT_ID.get()
 
-    @Inject protected lateinit var mPresenter: T
+    @Inject protected lateinit var mPresenter: P
+    protected lateinit var mViewModel: M
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,9 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
         onComponentCreated(mActivityComponent)
 
         setContentView(getLayoutId())
+
+        mViewModel = ViewModelProviders.of(this).get(getViewModelClass())
+
         mPresenter.attachView(this as V)
         initViews()
 
@@ -52,6 +58,8 @@ abstract class BaseActivity<in V : IMvpView, T : IPresenter<V>>
 
 
     protected abstract fun getLayoutId(): Int
+
+    protected abstract fun getViewModelClass():Class<M>
 
     protected open fun initViews() {}
 
