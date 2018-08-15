@@ -35,6 +35,7 @@ abstract class BaseActivity<V : IMvpView, P : BasePresenter<V>, M : ViewModel>
         setContentView(getLayoutId())
 
         mViewModel = ViewModelProviders.of(this).get(getViewModelClass())
+        subscribeOnViewModelLiveData()
 
 //        lifecycle.addObserver(mPresenter)
         mPresenter.attachView(this as V)
@@ -66,8 +67,10 @@ abstract class BaseActivity<V : IMvpView, P : BasePresenter<V>, M : ViewModel>
 
     protected open fun initViews() {}
 
+    protected abstract fun subscribeOnViewModelLiveData()
+
     override fun onDestroy() {
-        mPresenter.detachView()
+//        mPresenter.detachView()
         if (!isChangingConfigurations) {
             componentsMap.remove(activityId)
         }
