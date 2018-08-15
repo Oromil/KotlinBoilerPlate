@@ -12,7 +12,7 @@ import com.oromil.kotlinboilerplate.dagger.module.ActivityModule
 import java.util.concurrent.atomic.AtomicLong
 import javax.inject.Inject
 
-abstract class BaseActivity<in V : IMvpView, P : IPresenter<V>, M:ViewModel>
+abstract class BaseActivity<V : IMvpView, P : BasePresenter<V>, M : ViewModel>
     : AppCompatActivity(), IMvpView {
 
     private val KEY_ACTIVITY_ID: String = "ACTIVITY_ID"
@@ -22,7 +22,8 @@ abstract class BaseActivity<in V : IMvpView, P : IPresenter<V>, M:ViewModel>
     private lateinit var mActivityComponent: ActivityComponent
     private var activityId: Long = NEXT_ID.get()
 
-    @Inject protected lateinit var mPresenter: P
+    @Inject
+    protected lateinit var mPresenter: P
     protected lateinit var mViewModel: M
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,9 @@ abstract class BaseActivity<in V : IMvpView, P : IPresenter<V>, M:ViewModel>
 
         mViewModel = ViewModelProviders.of(this).get(getViewModelClass())
 
+//        lifecycle.addObserver(mPresenter)
         mPresenter.attachView(this as V)
+        lifecycle.addObserver(mPresenter)
         initViews()
 
     }
@@ -59,7 +62,7 @@ abstract class BaseActivity<in V : IMvpView, P : IPresenter<V>, M:ViewModel>
 
     protected abstract fun getLayoutId(): Int
 
-    protected abstract fun getViewModelClass():Class<M>
+    protected abstract fun getViewModelClass(): Class<M>
 
     protected open fun initViews() {}
 
