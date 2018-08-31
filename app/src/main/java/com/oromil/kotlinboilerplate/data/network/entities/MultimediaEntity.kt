@@ -7,26 +7,26 @@ import com.google.gson.annotations.SerializedName
 data class MultimediaEntity(
         @SerializedName("url")
         @Expose
-        var url: String,
+        var url: String = "",
         @SerializedName("format")
         @Expose
-        var format: String,
+        var format: String = "",
         @SerializedName("height")
         @Expose
-        var height: Int,
+        var height: Int = -1,
         @SerializedName("width")
         @Expose
-        var width: Int,
+        var width: Int = -1,
         @SerializedName("type")
         @Expose
-        var type: String,
+        var type: String = "",
         @SerializedName("subtype")
         @Expose
-        var subtype: String,
+        var subtype: String = "",
         @SerializedName("caption")
         @Expose
-        var caption: String,
+        var caption: String = "",
         @SerializedName("copyright")
         @Expose
-        var copyright: String
+        var copyright: String = ""
 )

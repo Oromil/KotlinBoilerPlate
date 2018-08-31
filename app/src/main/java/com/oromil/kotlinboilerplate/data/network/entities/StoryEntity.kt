@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class StorieEntity(
+data class StoryEntity(
         @SerializedName("section")
         @Expose
         var section: String,
@@ -55,7 +55,7 @@ data class StorieEntity(
         var geoFacet: List<String>,
         @SerializedName("multimedia")
         @Expose
-        var multimedia: List<MultimediaEntity>,
+        var multimedia: ArrayList<MultimediaEntity>,
         @SerializedName("short_url")
         @Expose
         var shortUrl: String
