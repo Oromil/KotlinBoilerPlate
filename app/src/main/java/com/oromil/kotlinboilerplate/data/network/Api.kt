@@ -10,13 +10,13 @@ interface Api {
 
     companion object Creator{
 
-        private val BASE_URL: String = ""
+        private const val BASE_URL: String = ""
 
         fun create(): Api {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://api.nytimes.com/svc/")
+                    .baseUrl(BASE_URL)
                     .build()
             return retrofit.create(Api::class.java)
         }

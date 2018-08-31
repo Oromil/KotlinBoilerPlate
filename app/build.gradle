@@ -57,5 +57,6 @@ dependencies {
     //Room
     implementation "android.arch.persistence.room:runtime:$ARC_COMPONENTS_VERSION"
     annotationProcessor "android.arch.persistence.room:compiler:$ARC_COMPONENTS_VERSION"
+    implementation "android.arch.persistence.room:rxjava2:$ARC_COMPONENTS_VERSION"
 
 }
