@@ -22,7 +22,7 @@ interface Api {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(BASE_URL)
+                    .baseUrl("https://api.nytimes.com/svc/")
                     .build()
             return retrofit.create(Api::class.java)
         }
