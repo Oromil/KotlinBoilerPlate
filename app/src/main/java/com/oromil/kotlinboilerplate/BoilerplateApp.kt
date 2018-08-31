@@ -11,6 +11,7 @@ class BoilerplateApp : Application() {
     companion object {
         fun get(context: Context) = context.applicationContext as BoilerplateApp
     }
+
     val component: ApplicationComponent? by lazy {
         DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
