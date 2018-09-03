@@ -1,8 +1,10 @@
 package com.oromil.kotlinboilerplate.ui.main
 
 import com.oromil.kotlinboilerplate.data.DataManager
+import com.oromil.kotlinboilerplate.data.local.AppDataBase
 import com.oromil.kotlinboilerplate.ui.base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -15,8 +17,7 @@ class MainPresenter @Inject constructor(private val mDataManager: DataManager) :
         mDataManager.getNews()
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { t ->
-                    mView!!.getViewModel().setContent(t)
-                }
+                ?.subscribe({ dataList -> mView!!.getViewModel().setContent(dataList) },
+                        { throwable -> throwable.printStackTrace() })
     }
 }

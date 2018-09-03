@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.oromil.kotlinboilerplate.R
 import com.oromil.kotlinboilerplate.dagger.components.ActivityComponent
-import com.oromil.kotlinboilerplate.data.network.entities.StoryEntity
+import com.oromil.kotlinboilerplate.data.entities.StoryEntity
 import com.oromil.kotlinboilerplate.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 

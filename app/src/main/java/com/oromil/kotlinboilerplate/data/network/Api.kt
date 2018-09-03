@@ -1,6 +1,6 @@
 package com.oromil.kotlinboilerplate.data.network
 
-import com.oromil.kotlinboilerplate.data.network.entities.ResponseEntity
+import com.oromil.kotlinboilerplate.data.entities.ResponseEntity
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

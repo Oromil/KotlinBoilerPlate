@@ -3,7 +3,7 @@ package com.oromil.kotlinboilerplate.ui.main
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.oromil.kotlinboilerplate.data.network.entities.StoryEntity
+import com.oromil.kotlinboilerplate.data.entities.StoryEntity
 
 class MainViewModel : ViewModel() {
 

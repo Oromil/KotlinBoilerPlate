@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.oromil.kotlinboilerplate.R
-import com.oromil.kotlinboilerplate.data.network.entities.StoryEntity
+import com.oromil.kotlinboilerplate.data.entities.StoryEntity
 import com.oromil.kotlinboilerplate.ui.base.BaseAdapter
 import kotlinx.android.synthetic.main.item_storie.view.*
 

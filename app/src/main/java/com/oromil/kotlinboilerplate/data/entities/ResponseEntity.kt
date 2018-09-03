@@ -1,4 +1,4 @@
-package com.oromil.kotlinboilerplate.data.network.entities
+package com.oromil.kotlinboilerplate.data.entities
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

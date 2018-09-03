@@ -1,24 +1,30 @@
 package com.oromil.kotlinboilerplate.data.local.dao
 
 import android.arch.persistence.room.*
-import com.oromil.kotlinboilerplate.data.local.entities.DataBaseEntity
+import com.oromil.kotlinboilerplate.data.entities.StoryEntity
 import io.reactivex.Flowable
 
 @Dao
 interface DataBaseDao {
 
-    @Query("SELECT * FROM database_entity")
-    fun getAll(): Flowable<List<DataBaseEntity>>
+    @Query("SELECT * FROM stories_table")
+    fun getAllAsFlowable(): Flowable<List<StoryEntity>>
 
-    @Query("SELECT * FROM database_entity WHERE id = :id")
-    fun getById(id: Int): Flowable<DataBaseEntity>
+    @Query("SELECT * FROM stories_table")
+    fun getAll(): List<StoryEntity>
+
+    @Query("SELECT * FROM stories_table WHERE url = :url")
+    fun getById(url:String): Flowable<StoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(entity: DataBaseEntity)
+    fun insert(entity: StoryEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(entities: List<StoryEntity>)
 
     @Update
-    fun update(entity: DataBaseEntity)
+    fun update(entity: StoryEntity)
 
     @Delete
-    fun delete(entity: DataBaseEntity)
+    fun delete(entity: StoryEntity)
 }

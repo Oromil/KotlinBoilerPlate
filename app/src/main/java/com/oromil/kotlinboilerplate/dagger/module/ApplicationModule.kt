@@ -14,32 +14,27 @@ import javax.inject.Singleton
  * Provide application-level dependencies.
  */
 @Module
-class ApplicationModule(protected val mApplication: Application) {
+class ApplicationModule(private val mApplication: Application) {
 
     private val DATABASE_NAME: String = "database"
 
     @Provides
-    @ApplicationContext
-    internal fun provideApplication(): Application {
-        return mApplication
-    }
-
-//    @Provides
 //    @ApplicationContext
-//    internal fun provideContext(): Context {
-//        return mApplication
-//    }
+    internal fun provideApplication(): Application = mApplication
+
+//    @ApplicationContext
+    @Provides fun provideContext(): Context = mApplication.applicationContext
 
     @Provides
     @Singleton
-//    @ApplicationContext
     internal fun provideApiService(): Api {
         return Api.create()
     }
 
-    @Provides
     @Singleton
-    internal fun provideDataBase(): AppDataBase {
-        return Room.databaseBuilder(mApplication, AppDataBase::class.java, DATABASE_NAME).build()
+    @Provides fun provideDataBase(context: Context): AppDataBase {
+        return Room.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME).build()
     }
+
+    @Provides fun providesDao(database: AppDataBase) = database.mDao()
 }
