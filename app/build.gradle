@@ -34,6 +34,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -57,6 +59,7 @@ dependencies {
     //ArchitectureComponents
     implementation "android.arch.lifecycle:extensions:$ARC_COMPONENTS_VERSION"
     annotationProcessor "android.arch.lifecycle:compiler:$ARC_COMPONENTS_VERSION"
+    implementation "android.arch.lifecycle:reactivestreams:$ARC_COMPONENTS_VERSION"
 
     //Room
     implementation "android.arch.persistence.room:runtime:$ARC_COMPONENTS_VERSION"

@@ -1,6 +1,5 @@
 package com.oromil.kotlinboilerplate.data
 
-import com.oromil.kotlinboilerplate.dagger.ApplicationContext
 import com.oromil.kotlinboilerplate.data.local.dao.DataBaseDao
 import com.oromil.kotlinboilerplate.data.network.Api
 import com.oromil.kotlinboilerplate.data.entities.MultimediaEntity
@@ -11,7 +10,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@ApplicationContext
 class DataManager @Inject constructor(private val api: Api, private val dataBaseDao: DataBaseDao) {
 
     fun getNews(): Flowable<List<StoryEntity>>? {
