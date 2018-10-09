@@ -13,20 +13,16 @@ import javax.inject.Singleton
 class DataManager @Inject constructor(private val api: Api, private val dataBaseDao: DataBaseDao) {
 
     fun getNews(): Flowable<List<StoryEntity>>? {
-        return api.getNews().map { t ->
-            t.results.forEach { storyEntity: StoryEntity ->
+        return api.getNews().map { response ->
+            response.results.forEach { storyEntity: StoryEntity ->
                 if (storyEntity.multimedia.isEmpty())
                     storyEntity.multimedia.add(MultimediaEntity())
             }
-            t.results
+            response.results
         }.map { t: List<StoryEntity> ->
             dataBaseDao.insert(t)
             t
         }.onErrorReturn { dataBaseDao.getAll() }
                 .toFlowable(BackpressureStrategy.BUFFER)
     }
-
-//    fun getFromDataBase(): Flowable<List<StoryEntity>> {
-//        return dataBaseDao.getAllAsFlowable()
-//    }
 }

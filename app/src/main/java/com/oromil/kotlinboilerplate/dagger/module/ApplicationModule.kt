@@ -13,14 +13,10 @@ import javax.inject.Singleton
  * Provide application-level dependencies.
  */
 
-@Module
-class ApplicationModule(private val mApplication: Application) {
+@Module(includes = [ViewModelModule::class])
+class ApplicationModule {
 
     private val DATABASE_NAME: String = "database"
-
-//    @ApplicationContext
-    @Provides
-    fun provideContext(): Context = mApplication.applicationContext
 
     @Provides
     @Singleton
@@ -30,8 +26,8 @@ class ApplicationModule(private val mApplication: Application) {
 
     @Singleton
     @Provides
-    fun provideDataBase(context: Context): AppDataBase {
-        return Room.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME).build()
+    fun provideDataBase(application: Application): AppDataBase {
+        return Room.databaseBuilder(application, AppDataBase::class.java, DATABASE_NAME).build()
     }
 
     @Singleton

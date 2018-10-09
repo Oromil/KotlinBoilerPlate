@@ -1,20 +1,23 @@
 package com.oromil.kotlinboilerplate
 
+import android.app.Activity
 import android.app.Application
-import android.content.Context
-import com.oromil.kotlinboilerplate.dagger.components.ApplicationComponent
 import com.oromil.kotlinboilerplate.dagger.components.DaggerApplicationComponent
-import com.oromil.kotlinboilerplate.dagger.module.ApplicationModule
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class BoilerplateApp : Application() {
+class BoilerplateApp : Application(), HasActivityInjector {
 
-    companion object {
-        fun get(context: Context) = context.applicationContext as BoilerplateApp
-    }
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-    val component: ApplicationComponent? by lazy {
-        DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
-                .build()
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+
+    override fun onCreate() {
+        super.onCreate()
+
+        DaggerApplicationComponent.builder().application(this).build().inject(this)
     }
 }
